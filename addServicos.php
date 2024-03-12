@@ -11,9 +11,12 @@ if (empty($nome) || empty($preco) || empty($descricao) || empty($petId))
     exit;
 }
 $PDO = db_connect();
-$sql = "INSERT INTO tipos(descricaoTipo) VALUES(:descricao)";
+$sql = "INSERT INTO Servicos(Nome, Preco, Descricao, PetId) VALUES(:nome, :preco, :descricao, :petId)";
 $stmt = $PDO->prepare($sql);
+$stmt->bindParam(':nome', $nome);
+$stmt->bindParam(':preco', $preco);
 $stmt->bindParam(':descricao', $descricao);
+$stmt->bindParam('petId');
 
 if ($stmt->execute())
 {
